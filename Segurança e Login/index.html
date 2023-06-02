@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+  <title>login</title>
   <style>
     body {
       font-family: Arial;
@@ -65,19 +65,27 @@
 </head>
 <body>
   <div class="container">
-    <h2>Realize o Login para continuar</h2>
+    <h2>Realize seu login</h2>
     <form id="loginForm">
       <label for="username">Usuario:</label>
       <input type="text" id="username" name="username" placeholder="Digite seu usuario">
-  
+
       <label for="password">Senha:</label>
       <input type="password" id="password" name="password" placeholder="Digite sua senha">
-  
+
       <button type="submit" id="loginButton">Entrar</button>
     </form>
   </div>
 
   <script>
+    // Lista de usuários permitidos
+    var users = [
+      { username: "exemplo", password: "123456" },
+      { username: "usuario1", password: "senha1" },
+      { username: "usuario2", password: "senha2" },
+      // Adicione mais usuários aqui
+    ];
+
     document.getElementById("loginForm").addEventListener("submit", function(event) {
       event.preventDefault(); // Impede o envio do formulário padrão
       
@@ -86,9 +94,16 @@
       var password = document.getElementById("password").value;
       
       // Verificar se os campos de usuário e senha estão preenchidos corretamente
-      if (username === "exemplo" && password === "123456") {
+      var isValidUser = users.some(function(user) {
+        return user.username === username && user.password === password;
+      });
+
+      if (isValidUser) {
+        // Armazenar o sinal de autenticação no localStorage
+        localStorage.setItem("isLoggedIn", "true");
+        
         // Redirecionar para a página personalizada
-        window.location.href = "pagina_principal.html";
+        window.location.href = "pagina_protegida.html";
       } else {
         alert("Usuário ou senha inválidos!");
       }
