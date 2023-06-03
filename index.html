@@ -38,11 +38,22 @@
       background-color: #4CAF50;
       color: white;
       padding: 14px 20px;
-      margin: 8px 0;
+      margin: 0px 0;
       border: none;
       cursor: pointer;
       width: 100%;
     }
+
+    .secure-page {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    iframe {
+    width: 100%;
+    height: 100%;
+  }
   </style>
 </head>
 <body>
@@ -81,8 +92,12 @@
         // Exibir mensagem de login bem-sucedido
         alert("Login bem-sucedido!");
         
-        // Redirecionar para a página protegida
-        window.location.href = "pagina_protegida.html";
+        // Redirecionar para a página protegida exibindo o arquivo local
+        var iframe = document.createElement("iframe");
+        iframe.classList.add("secure-page");
+        iframe.src = "pagina_protegida.html";
+        document.body.innerHTML = "";
+        document.body.appendChild(iframe);
       } else {
         alert("Usuário ou senha inválidos!");
       }
@@ -96,8 +111,16 @@
       if (isLoggedIn === "true") {
         // Limpar o sinal de autenticação
         sessionStorage.removeItem("isLoggedIn");
+        
+        // Redirecionar para a página protegida exibindo o arquivo local
+        var iframe = document.createElement("iframe");
+        iframe.classList.add("secure-page");
+        iframe.src = "pagina_protegida.html";
+        document.body.innerHTML = "";
+        document.body.appendChild(iframe);
+        
       }
     });
   </script>
 </body>
-</
+</html>
