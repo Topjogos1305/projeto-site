@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Página Segura</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+
+    .container h2 {
+      margin-top: 0;
+    }
+
+    .container p {
+      margin-bottom: 20px;
+    }
+
+    .container form {
+      margin-bottom: 20px;
+    }
+
+    .container form input[type="text"] {
+      width: 100%;
+      padding: 10px;
+    }
+
+    .container form button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .container ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .container li {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Bem-vindo à Página Segura</h2>
+    <p>Aqui você pode adicionar e visualizar conteúdo restrito.</p>
+
+    <form id="contentForm">
+      <label for="content">Novo Conteúdo:</label>
+      <input type="text" id="content" name="content" placeholder="Digite o conteúdo">
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <ul id="contentList"></ul>
+
+    <button id="logoutButton">Logout</button>
+  </div>
+
+  <script>
+    // Botão Logout
+    var logoutButton = document.getElementById("logoutButton");
+    logoutButton.addEventListener("click", function() {
+      // Remover o sinal de autenticação e recarregar a página de login
+      localStorage.removeItem("isLoggedIn");
+      window.location.reload();
+    });
+
+    // Formulário de conteúdo
+    var contentForm = document.getElementById("contentForm");
+    var contentInput = document.getElementById("content");
+    var contentList = document.getElementById("contentList");
+
+    contentForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      var newContent = contentInput.value;
+
+      if (newContent) {
+        // Armazenar o novo conteúdo no Local Storage
+        var storedContent = localStorage.getItem("storedContent");
+
+        if (storedContent) {
+          // Se já existir conteúdo armazenado, atualize-o
+          storedContent = JSON.parse(storedContent);
+          storedContent.push(newContent);
+          localStorage.setItem("storedContent", JSON.stringify(storedContent));
+        } else {
+          // Se não houver conteúdo armazenado, crie um novo
+          var initialContent = [newContent];
+          localStorage.setItem("storedContent", JSON.stringify(initialContent));
+        }
+
+        // Atualizar a lista de conteúdos exibida
+        updateContentList();
+        
+        // Limpar o campo de entrada
+        contentInput.value = "";
+      }
+    });
+
+    // Função para atualizar a lista de conteúdos exibida
+    function updateContentList() {
+      var storedContent = localStorage.getItem("storedContent");
+
+      if (storedContent) {
+        storedContent = JSON.parse(storedContent);
+
+        // Limpar a lista antes de atualizar
+        contentList.innerHTML = "";
+
+        // Adicionar cada item da lista
+        storedContent.forEach(function(content) {
+          var listItem = document.createElement("li");
+          listItem.textContent = content;
+          contentList.appendChild(listItem);
+        });
+      }
+    }
+
+    // Ao carregar a página, atualize a lista de conteúdos exibida
+    window.addEventListener("DOMContentLoaded", function() {
+      updateContentList();
+    });
+  </script>
+</body>
+</html>

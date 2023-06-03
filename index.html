@@ -87,13 +87,19 @@
         
         // Exibir mensagem de login bem-sucedido
         alert("Login bem-sucedido!");
-        
-        // Redirecionar para a página protegida exibindo o arquivo local
-        var iframe = document.createElement("iframe");
-        iframe.classList.add("secure-page");
-        iframe.src = "pagina_principal.html";
-        document.body.innerHTML = "";
-        document.body.appendChild(iframe);
+
+        // Verificar se o usuário é "luiz"
+        if (username === "luiz") {
+          // Redirecionar para a interface específica do usuário "luiz"
+          window.location.href = "interface_admin.html";
+        } else {
+          // Redirecionar para a página protegida exibindo o arquivo local
+          var iframe = document.createElement("iframe");
+          iframe.classList.add("secure-page");
+          iframe.src = "pagina_principal.html";
+          document.body.innerHTML = "";
+          document.body.appendChild(iframe);
+        }
       } else {
         alert("Usuario ou senha Incorretos!");
       }
