@@ -15,9 +15,9 @@
 
     }
     h2 {
-  font: bolder;
-  font-size: xx-large;
-  text-align: center;
+    : bolder;
+    font-size: xx-large;
+    text-align: center;
     }
 
     .container input[type="text"],
@@ -57,7 +57,8 @@
       width: 100%;
     }
     
-    .containe  </style>
+    .containe
+  </style>
 </head>
 <body>
   <div class="container">
@@ -76,7 +77,7 @@
   <script>
     // Objeto com os usuários permitidos
     var allowedUsers = {
-      "exemplo": "12345",
+      "exemplo": "123456",
       "usuario1": "senha1",
       "usuario2": "senha2"
       // Adicione mais usuários aqui
@@ -94,14 +95,23 @@
         // Armazenar o sinal de autenticação no sessionStorage
         sessionStorage.setItem("isLoggedIn", "true");
         
-        // Redirecionar para a página personalizada
+        // Redirecionar para a página protegida
         window.location.href = "pagina_protegida.html";
       } else {
         alert("Usuário ou senha inválidos!");
       }
     });
+
+    // Verificar se o usuário já está logado ao carregar a página
+    window.addEventListener("DOMContentLoaded", function() {
+      // Verificar se o usuário já está autenticado
+      var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+      
+      if (isLoggedIn === "true") {
+        // Limpar o sinal de autenticação
+        sessionStorage.removeItem("isLoggedIn");
+      }
+    });
   </script>
 </body>
-</html>r button:hover {
-      opacity: 0.8;
-    }
+</html>
