@@ -57,18 +57,14 @@
       width: 100%;
     }
     
-    .container button:hover {
-      opacity: 0.8;
-    }
-
-  </style>
+    .containe  </style>
 </head>
 <body>
   <div class="container">
     <h2>Realize seu login</h2>
     <form id="loginForm">
-      <label for="username">Usuario:</label>
-      <input type="text" id="username" name="username" placeholder="Digite seu usuario">
+      <label for="username">Usuário:</label>
+      <input type="text" id="username" name="username" placeholder="Digite seu usuário">
 
       <label for="password">Senha:</label>
       <input type="password" id="password" name="password" placeholder="Digite sua senha">
@@ -78,13 +74,13 @@
   </div>
 
   <script>
-    // Lista de usuários permitidos
-    var users = [
-      { username: "exemplo", password: "123456" },
-      { username: "usuario1", password: "senha1" },
-      { username: "usuario2", password: "senha2" },
+    // Objeto com os usuários permitidos
+    var allowedUsers = {
+      "exemplo": "12345",
+      "usuario1": "senha1",
+      "usuario2": "senha2"
       // Adicione mais usuários aqui
-    ];
+    };
 
     document.getElementById("loginForm").addEventListener("submit", function(event) {
       event.preventDefault(); // Impede o envio do formulário padrão
@@ -94,20 +90,18 @@
       var password = document.getElementById("password").value;
       
       // Verificar se os campos de usuário e senha estão preenchidos corretamente
-      var isValidUser = users.some(function(user) {
-        return user.username === username && user.password === password;
-      });
-
-      if (isValidUser) {
-        // Armazenar o sinal de autenticação no localStorage
-        localStorage.setItem("isLoggedIn", "true");
+      if (allowedUsers.hasOwnProperty(username) && allowedUsers[username] === password) {
+        // Armazenar o sinal de autenticação no sessionStorage
+        sessionStorage.setItem("isLoggedIn", "true");
         
         // Redirecionar para a página personalizada
         window.location.href = "pagina_protegida.html";
       } else {
-        alert("Usuario ou senha Incorretos!");
+        alert("Usuário ou senha inválidos!");
       }
     });
   </script>
 </body>
-</html>
+</html>r button:hover {
+      opacity: 0.8;
+    }
