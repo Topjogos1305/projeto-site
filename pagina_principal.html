@@ -24,5 +24,18 @@
     <h1>4. Endividamento: Saber usar o crédito de forma responsável e entender as consequências do endividamento excessivo são aspectos cruciais da educação financeira. Isso inclui aprender sobre taxas de juros, crédito rotativo, empréstimos estudantis e hipotecas.</h1>
     <h1>5. Planejamento para a aposentadoria: Entender opções de planos de aposentadoria, como previdência privada ou fundos de investimento voltados para aposentadoria, permite que as pessoas se preparem para o futuro e tenham uma renda estável na idade mais avançada.</h1>
     </main>
+
+    <script>
+      // Verificar se o usuário está autenticado
+      var isLoggedIn = localStorage.getItem("isLoggedIn");
+      
+      if (!isLoggedIn) {
+        // Redirecionar de volta para a página de login se não estiver autenticado
+        window.location.href = "index.html";
+      } else {
+        // Remover o sinal de autenticação após o usuário ter acessado a página protegida
+        localStorage.removeItem("isLoggedIn");
+      }
+    </script>
   </body>
 </html>
