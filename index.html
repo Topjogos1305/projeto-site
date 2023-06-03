@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>login</title>
+  <title>Login</title>
   <style>
     body {
       font-family: Arial;
@@ -11,13 +11,17 @@
       height: 100vh;
       font-family: Arial, sans-serif;
       background-color: #87c8e0;
+      margin: 0;
+      padding: 0;
     }
 
-    }
-    h2 {
-    : bolder;
-    font-size: xx-large;
-    text-align: center;
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f2f2f2;
     }
 
     .container input[type="text"],
@@ -30,23 +34,6 @@
       box-sizing: border-box;
     }
 
-    .container {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #f2f2f2;
-      
-      display: flex;
-      justify-content: center; /* Centraliza horizontalmente */
-      align-items: center; /* Centraliza verticalmente */
-    }
-    
-    .container h2 {
-      text-align: center;
-    }
-
     .container button {
       background-color: #4CAF50;
       color: white;
@@ -56,8 +43,6 @@
       cursor: pointer;
       width: 100%;
     }
-    
-    .containe
   </style>
 </head>
 <body>
@@ -78,8 +63,6 @@
     // Objeto com os usuários permitidos
     var allowedUsers = {
       "exemplo": "123456",
-      "usuario1": "senha1",
-      "usuario2": "senha2"
       // Adicione mais usuários aqui
     };
 
@@ -94,6 +77,9 @@
       if (allowedUsers.hasOwnProperty(username) && allowedUsers[username] === password) {
         // Armazenar o sinal de autenticação no sessionStorage
         sessionStorage.setItem("isLoggedIn", "true");
+        
+        // Exibir mensagem de login bem-sucedido
+        alert("Login bem-sucedido!");
         
         // Redirecionar para a página protegida
         window.location.href = "pagina_protegida.html";
@@ -114,4 +100,4 @@
     });
   </script>
 </body>
-</html>
+</
