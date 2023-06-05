@@ -43,20 +43,14 @@
       cursor: pointer;
       width: 100%;
     }
-
-    .secure-page {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <h2>Realize seu login</h2>
     <form id="loginForm">
-      <label for="username">Usuario:</label>
-      <input type="text" id="username" name="username" placeholder="Digite seu usuario">
+      <label for="username">Usuário:</label>
+      <input type="text" id="username" name="username" placeholder="Digite seu usuário">
 
       <label for="password">Senha:</label>
       <input type="password" id="password" name="password" placeholder="Digite sua senha">
@@ -75,51 +69,20 @@
 
     document.getElementById("loginForm").addEventListener("submit", function(event) {
       event.preventDefault(); // Impede o envio do formulário padrão
-      
+
       // Obter os valores digitados pelo usuário
       var username = document.getElementById("username").value;
       var password = document.getElementById("password").value;
-      
+
       // Verificar se os campos de usuário e senha estão preenchidos corretamente
       if (allowedUsers.hasOwnProperty(username) && allowedUsers[username] === password) {
-        // Armazenar o sinal de autenticação no sessionStorage
-        sessionStorage.setItem("isLoggedIn", "true");
-        
         // Exibir mensagem de login bem-sucedido
-        alert("Login bem-sucedido!");
+        alert("Login bem-sucedido! Usuário: " + username);
 
-        // Verificar se o usuário é "luiz"
-        if (username === "luiz") {
-          // Redirecionar para a interface específica do usuário "luiz"
-          window.location.href = "pagina_principal.html";
-        } else {
-          // Redirecionar para a página protegida exibindo o arquivo local
-          var iframe = document.createElement("iframe");
-          iframe.classList.add("secure-page");
-          iframe.src = "pagina_principal.html";
-          document.body.innerHTML = "";
-          document.body.appendChild(iframe);
-        }
+        // Redirecionar para a página principal
+        window.location.href = "pagina_principal.html";
       } else {
-        alert("Usuario ou senha Incorretos!");
-      }
-    });
-
-    // Verificar se o usuário já está logado ao carregar a página
-    window.addEventListener("DOMContentLoaded", function() {
-      // Verificar se o usuário já está autenticado
-      var isLoggedIn = sessionStorage.getItem("isLoggedIn");
-      
-      if (isLoggedIn === "true") {
-        // Limpar o sinal de autenticação
-        sessionStorage.removeItem("isLoggedIn");
-        
-        // Redirecionar para a página protegida exibindo o arquivo local
-        var iframe = document.createElement("iframe");
-        iframe.classList.add("secure-page");
-        iframe.src = "pagina_principal.html";
-        document.body.innerHTML = "";
-        document.body.appendChild(iframe);
+        alert("Usuário ou senha incorretos!");
       }
     });
   </script>
